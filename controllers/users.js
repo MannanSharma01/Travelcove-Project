@@ -60,7 +60,7 @@ module.exports.loginDone = (req, res) => {
   } 
   else {
     req.session.save( () => {
-      res.redirect(`http://localhost:8080${res.locals.pathAndQS}`)
+      res.redirect(res.locals.pathAndQS)
     });   
   }
 };
