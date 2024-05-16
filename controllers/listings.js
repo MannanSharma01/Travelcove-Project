@@ -8,9 +8,9 @@ const geocoding = mbxGeocoding({accessToken: process.env.MAP_TOKEN});
 
 
 module.exports.index = (req, res) => {     // no need for any error-handling in this function
-  let newListing = Listings.find({}) ;
-  newListing.then( (result) => {                     // we can simply make this function 'async', and use 'await' here. I am using 'then' here, just for practice
-    handlingFlash(req, res); 
+  Listings.find({})
+  .then( (result) => {                     // we can simply make this function 'async', and use 'await' here. I am using 'then' here, just for practice
+    handlingFlash(req, res);
     res.render("listings/index.ejs", {allListings: result});
   } );
 } ;
@@ -74,7 +74,10 @@ module.exports.create = async (req, res, next) => {
     let x= newListing.save();          // this is an 'async' function, ideally, we should have use 'await' here, instead of .then, .catch. Doing it just for my practice. 
     x.then( () => {
       req.flash("successMsg", "New Listing Created !");
-      res.redirect("http://localhost:3000/listings");
+      req.session.save( (err)=> {
+        res.redirect("http://localhost:3000/listings");
+      });
+      
     })
     .catch( () => {                                                      // to handle casting,validation error. 
       cloudinary.uploader.destroy(req.file.filename, (err, result) => {
@@ -131,7 +134,10 @@ module.exports.update = async (req, res, next) => {
           console.log("the previous file deleted from the cloud");
         });
         req.flash("successMsg", "Listing Updated Successfully!");
-        res.redirect(`http://localhost:8080/listings/${req.params.id}`);
+        req.session.save( (err)=> {
+          res.redirect(`http://localhost:8080/listings/${req.params.id}`);
+        });
+        
       } catch {
         cloudinary.uploader.destroy(req.file.filename, (err, result) => {
           console.log("the file deleted from the cloud");
@@ -151,7 +157,10 @@ module.exports.delete = async (req, res, next) => {
   cloudinary.uploader.destroy(deletedListing.image.filename, (err, result) => {
    console.log("a file deleted from the cloud.");
   });
-  res.redirect("http://localhost:3000/listings");
+  req.session.save( (err)=> {
+    res.redirect("http://localhost:3000/listings");
+  });
+  
   }         // NO NEED on 'ANY' error-handling in this function.
   
 

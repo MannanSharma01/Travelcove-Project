@@ -23,7 +23,9 @@ module.exports.signup = async (req, res) => {
 
     req.login(result, (err) => {
       req.flash("successMsg", "Welcome to Travelcove");
-      res.redirect("http://localhost:8080/listings");
+      req.session.save( () => {
+        res.redirect("http://localhost:8080/listings");
+      }); 
     });   
   }
   catch(e) {
@@ -33,7 +35,10 @@ module.exports.signup = async (req, res) => {
     else {    
       req.flash("error", e.message);
     }
-    res.redirect("http://localhost:8080/signup");
+    req.session.save( () => {
+      res.redirect("http://localhost:8080/signup");
+    });
+    
   }
 }
 
@@ -48,10 +53,15 @@ module.exports.loginDone = (req, res) => {
   req.flash("successMsg", "You successfully logged in. Welcome to Travelcove 👋");
 
   if( res.locals.pathAndQS === undefined) {           // client logged in as a user, WITHOUT we forbidding it(the client) to perform an action, as it was NOT logged in as a user. 
-    res.redirect("http://localhost:8080/listings");
+    req.session.save( () => {
+      res.redirect("http://localhost:8080/listings");
+    });
+    
   } 
   else {
-    res.redirect(`http://localhost:8080${res.locals.pathAndQS}`)
+    req.session.save( () => {
+      res.redirect(`http://localhost:8080${res.locals.pathAndQS}`)
+    });   
   }
 };
 
@@ -59,14 +69,21 @@ module.exports.loginDone = (req, res) => {
 module.exports.logout = (req, res) => {
   if(req.user === undefined) {                            // instead of using if-else here, we could have used a middleware function
     req.flash("error", "You are already logged out");
-    return res.redirect("http://localhost:8080/listings");
-  }
-  req.logOut( (err) => {
-    if(!err) {
-      req.flash("successMsg", "You Successfully Logged Out");
+    req.session.save( () => {
       res.redirect("http://localhost:8080/listings");
-    } else {
-      throw( MyError("500", "ERROR--unable to logout") );    // calling the 'next', 'possible', error handling middleware function
-    }
-  });
+    }); 
+  }
+  else {
+    req.logOut( (err) => {
+      if(!err) {
+        req.flash("successMsg", "You Successfully Logged Out");
+        req.session.save( () => {
+          res.redirect("http://localhost:8080/listings");
+        });
+        
+      } else {
+        throw( MyError("500", "ERROR--unable to logout") );    // calling the 'next', 'possible', error handling middleware function
+      }
+    });
+  }
 };

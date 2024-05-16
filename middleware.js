@@ -15,9 +15,14 @@ function isLoggedIn (req, res, next) {       // checks if a particular client is
 
     req.session.pathAndQs = req.originalUrl;        // remember the path to which, orignally the request was sent   // req.orignalUrl--path + queryString
     req.flash("error", "You Must Be Logged In To Perform This Action");
-    return res.redirect("http://localhost:8080/login");
+
+    req.session.save( (err) => {              // ensure that the session data is saved in the db, before redirecting
+      res.redirect("http://localhost:8080/login");
+    }); 
+  } else {
+    next();
   }
-  next();
+  
 }
 
 
@@ -35,7 +40,10 @@ async function isOwner(req, res, next) {      // checks if a user is the owner o
     } 
     else {       // user is the not owner of the listing, so DONT proceed
       req.flash("error", "You are NOT the owner of this listing. So can't perfrom this action.");
-      res.redirect(`http://localhost:8080/listings/${listingId}`);
+      req.session.save( (err) => {
+        res.redirect(`http://localhost:8080/listings/${listingId}`);
+      });
+      
     }
   }  
 }
@@ -47,9 +55,13 @@ function notLoggedIn (req, res, next) {       // ensures that the client is not 
 
   if( req.isAuthenticated() ) {
     req.flash("error", "You are already logged in.");
-    return res.redirect("http://localhost:8080/listings");
+    req.session.save( (err) => {
+      return res.redirect("http://localhost:8080/listings");
+    });
+  } else {
+    next();
   }
-  next();
+  
 }
 
 
@@ -84,7 +96,10 @@ async function notOwner(req, res, next) {            // to check if the user is 
   if(!theParticularListing) return next(new MyError(404, "no such listing found in the db"));
   if(theParticularListing.owner.toString() !== req.user._id.toString()) return next(); 
   req.flash("error", "You can't drop a review on your own listing");
-  res.redirect(`http://localhost:8080/listings/${listingId}`);
+  req.session.save( (err) => {
+    res.redirect(`http://localhost:8080/listings/${listingId}`);
+  });
+  
 }
 
 
@@ -103,8 +118,10 @@ async function authorOfTheReview(req, res, next) {    // to check if the user is
       if(!theListing) {
         next( new MyError(404, "no such listing exists---wrong listing id") );
       } else {
-        req.flash("error", "You are NOT the author of this review. So can't delete it");                 
-        res.redirect(`http://localhost:8080/listings/${req.params.id}`);
+        req.flash("error", "You are NOT the author of this review. So can't delete it");
+        req.session.save( (err) => {
+          res.redirect(`http://localhost:8080/listings/${req.params.id}`);
+        });       
       }
     }
   } 
