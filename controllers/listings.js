@@ -74,7 +74,7 @@ module.exports.create = async (req, res, next) => {
     let x= newListing.save();          // this is an 'async' function, ideally, we should have use 'await' here, instead of .then, .catch. Doing it just for my practice. 
     x.then( () => {
       req.flash("successMsg", "New Listing Created !");
-      req.session.save( (err)=> {
+      req.session.save( (err)=> {  
         res.redirect("http://localhost:3000/listings");
       });
       
@@ -170,11 +170,10 @@ module.exports.filter = async function(req, res) {
   let category = req.params.category;
   let allListings = await Listings.find({});
   let filteredListings = filterListings(allListings, category);
-  if(filteredListings.length === 0) {
-    handlingFlash(req, res);
+  handlingFlash(req, res);
+  if(!filteredListings.length) {
     res.render("listings/no-listing-matches.ejs", {message: "No listing matches the applied filter"});
   } else {
-    handlingFlash(req, res);
     res.render("listings/index.ejs", {allListings: filteredListings});
   }
  
