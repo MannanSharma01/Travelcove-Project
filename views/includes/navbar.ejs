@@ -8,10 +8,10 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="justify-content: space-between;">
 
       <div class="navbar-nav">
-        <a class="nav-link" href="http://localhost:8080/listings">Explore</a>
+        <a class="nav-link" href="/listings">Explore</a>
       </div>
 
-      <form class="d-flex" role="search" style="width: auto;"   action="http://localhost:8080/listings/countrySearch" method="get">  <!--pehle style: 450px; kiya hua tha-->
+      <form class="d-flex" role="search" style="width: auto;"   action="/listings/countrySearch" method="get">  <!--pehle style: 450px; kiya hua tha-->
         <input class="form-control me-2  nav-search-input" type="search" placeholder="Search Countries" name="country">
         <button class="btn nav-search-btn" type="submit">
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -20,12 +20,12 @@
       </form>
 
       <div class="navbar-nav">
-        <a class="nav-link" href="http://localhost:3000/listings/new">Airbnb Your Home</a>
+        <a class="nav-link" href="/listings/new">Airbnb Your Home</a>
         <% if(request.isAuthenticated()) { %>
-        <a class="nav-link" href="http://localhost:3000/logout"><b>LogOut</b></a>
+        <a class="nav-link" href="/logout"><b>LogOut</b></a>
         <% } else { %>
-        <a class="nav-link" href="http://localhost:8080/signup"><b>SignUp</b></a>
-        <a class="nav-link" href="http://localhost:8080/login"><b>LogIn</b></a>
+        <a class="nav-link" href="/signup"><b>SignUp</b></a>
+        <a class="nav-link" href="/login"><b>LogIn</b></a>
         <% } %>
       </div>
 

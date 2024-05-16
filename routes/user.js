@@ -14,7 +14,7 @@ router.route("/signup")
 // (if the client is already logged in as a user, when it(the client) sends this request, it should NOT BE ALLOWED to login)
 router.route("/login")
   .get(notLoggedIn, userController.loginForm)
-  .post(notLoggedIn, savePathAndQs, passport.authenticate("local", {failureRedirect: "http://localhost:3000/login", failureFlash: true}), userController.loginDone);
+  .post(notLoggedIn, savePathAndQs, passport.authenticate("local", {failureRedirect: "/login", failureFlash: true}), userController.loginDone);
 
 
 router.get("/logout", userController.logout);

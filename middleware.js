@@ -17,7 +17,7 @@ function isLoggedIn (req, res, next) {       // checks if a particular client is
     req.flash("error", "You Must Be Logged In To Perform This Action");
 
     req.session.save( (err) => {              // ensure that the session data is saved in the db, before redirecting
-      res.redirect("http://localhost:8080/login");
+      res.redirect("/login");
     }); 
   } else {
     next();
@@ -41,7 +41,7 @@ async function isOwner(req, res, next) {      // checks if a user is the owner o
     else {       // user is the not owner of the listing, so DONT proceed
       req.flash("error", "You are NOT the owner of this listing. So can't perfrom this action.");
       req.session.save( (err) => {
-        res.redirect(`http://localhost:8080/listings/${listingId}`);
+        res.redirect(`/listings/${listingId}`);
       });
       
     }
@@ -56,7 +56,7 @@ function notLoggedIn (req, res, next) {       // ensures that the client is not 
   if( req.isAuthenticated() ) {
     req.flash("error", "You are already logged in.");
     req.session.save( (err) => {
-      return res.redirect("http://localhost:8080/listings");
+      return res.redirect("/listings");
     });
   } else {
     next();
@@ -97,7 +97,7 @@ async function notOwner(req, res, next) {            // to check if the user is 
   if(theParticularListing.owner.toString() !== req.user._id.toString()) return next(); 
   req.flash("error", "You can't drop a review on your own listing");
   req.session.save( (err) => {
-    res.redirect(`http://localhost:8080/listings/${listingId}`);
+    res.redirect(`/listings/${listingId}`);
   });
   
 }
@@ -120,7 +120,7 @@ async function authorOfTheReview(req, res, next) {    // to check if the user is
       } else {
         req.flash("error", "You are NOT the author of this review. So can't delete it");
         req.session.save( (err) => {
-          res.redirect(`http://localhost:8080/listings/${req.params.id}`);
+          res.redirect(`/listings/${req.params.id}`);
         });       
       }
     }

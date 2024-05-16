@@ -89,7 +89,7 @@ passport.deserializeUser( User.deserializeUser() );
 const handlingFlash = require("./utilities/handlingFlash.js");      // this function handles the 'showing up the flash message', before any page is rendered
 //-------------------------------------------------              // so always call it before rendering any page.
 app.get("/", (req, res) => {
-  res.redirect("http://localhost:8080/listings");
+  res.redirect("/listings");
 });
 
 const listingRouter = require("./routes/listing.js") ;

@@ -10,7 +10,7 @@
       <% for(let i of allListings) { %> 
 
         <div class="card col-sm-6 col-lg-4 col-xl-3 mb-4   px-3 border-0 " id="al-card">
-          <a href="http://localhost:8080/listings/<%= i._id %>"  id="al-card-anc">
+          <a href="/listings/<%= i._id %>"  id="al-card-anc">
             <img src="<%= i.image.url %>" class="card-img-top"  id="al-card-img">
             <div class="card-img-overlay" id="al-card-img-overlay"></div>
             <div class="card-body"   id="al-card-body">

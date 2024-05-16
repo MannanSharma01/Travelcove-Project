@@ -16,7 +16,7 @@ module.exports.create = async (req, res, next) => {   // no constraints written 
   await Listings.findByIdAndUpdate(listingId, {reviews: theListing.reviews});   // (0 possiblity of this line giving an error)
   req.flash("successMsg", "New Review Created !");
   req.session.save( () => {
-    res.redirect(`http://localhost:8080/listings/${listingId}`);
+    res.redirect(`/listings/${listingId}`);
   }); 
 } ;     // I have removed all the error-handling from this function because, all of the handling has already been done in middleware functions, which are called before this middleware function is called(notOwner and validateReview).
 
@@ -29,7 +29,7 @@ module.exports.destroy = async(req, res) => {          // I have removed all the
 
   req.flash("successMsg", "Review Deleted Successfully!");
   req.session.save( () => {
-    res.redirect(`http://localhost:8080/listings/${listingId}`);
+    res.redirect(`/listings/${listingId}`);
   });
   
 }

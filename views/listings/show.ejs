@@ -27,8 +27,8 @@
         <% if(request.isAuthenticated() && request.user._id.toString() === theParticularListing.owner._id.toString()) { %>
 
           <div class="row justify-content-around">
-            <a class="col-sm-4 my-2   btn btn-dark" id="sh-edit-btn" href="http://localhost:8080/listings/<%= theParticularListing._id %>/edit">Edit</a>
-            <form class="col-sm-4 my-2   btn btn-dark" id="sh-delete"   action="http://localhost:8080/listings/<%= theParticularListing._id %>?_method=DELETE" method="post"><button id="sh-x" class="btn btn-dark">Delete</button></form>
+            <a class="col-sm-4 my-2   btn btn-dark" id="sh-edit-btn" href="/listings/<%= theParticularListing._id %>/edit">Edit</a>
+            <form class="col-sm-4 my-2   btn btn-dark" id="sh-delete"   action="/listings/<%= theParticularListing._id %>?_method=DELETE" method="post"><button id="sh-x" class="btn btn-dark">Delete</button></form>
           </div>
 
         <% } %>
@@ -37,7 +37,7 @@
 
       <hr class="mb-5">
                             <!-- column-2 -->
-      <form class="col-sm-8 col-10 needs-validation" action="http://localhost:3000/listings/<%= theParticularListing._id %>/reviews" method="post" novalidate>
+      <form class="col-sm-8 col-10 needs-validation" action="/listings/<%= theParticularListing._id %>/reviews" method="post" novalidate>
       <% if(request.isAuthenticated() && request.user._id.toString() !== theParticularListing.owner._id.toString()) { %>
         <h4 class="mb-4">   
           Leave a Review
@@ -97,7 +97,7 @@
                   </p>
                   
                   <% if(request.isAuthenticated() && (request.user._id.toString() === i.author._id.toString())) {%>
-                  <a href="http://localhost:8080/listings/<%= theParticularListing._id %>/reviews/<%= i._id %>" class="btn btn-dark btn-sm mt-2">Delete</a>
+                  <a href="/listings/<%= theParticularListing._id %>/reviews/<%= i._id %>" class="btn btn-dark btn-sm mt-2">Delete</a>
                   <% } %>
                   <p style="display: none;"><%= theParticularListing._id %></p>
                   <p style="display: none;"><%= i._id %></p>

@@ -24,7 +24,7 @@ module.exports.signup = async (req, res) => {
     req.login(result, (err) => {
       req.flash("successMsg", "Welcome to Travelcove");
       req.session.save( () => {
-        res.redirect("http://localhost:8080/listings");
+        res.redirect("/listings");
       }); 
     });   
   }
@@ -36,7 +36,7 @@ module.exports.signup = async (req, res) => {
       req.flash("error", e.message);
     }
     req.session.save( () => {
-      res.redirect("http://localhost:8080/signup");
+      res.redirect("/signup");
     });
     
   }
@@ -54,7 +54,7 @@ module.exports.loginDone = (req, res) => {
 
   if( res.locals.pathAndQS === undefined) {           // client logged in as a user, WITHOUT we forbidding it(the client) to perform an action, as it was NOT logged in as a user. 
     req.session.save( () => {
-      res.redirect("http://localhost:8080/listings");
+      res.redirect("/listings");
     });
     
   } 
@@ -70,7 +70,7 @@ module.exports.logout = (req, res) => {
   if(req.user === undefined) {                            // instead of using if-else here, we could have used a middleware function
     req.flash("error", "You are already logged out");
     req.session.save( () => {
-      res.redirect("http://localhost:8080/listings");
+      res.redirect("/listings");
     }); 
   }
   else {
@@ -78,7 +78,7 @@ module.exports.logout = (req, res) => {
       if(!err) {
         req.flash("successMsg", "You Successfully Logged Out");
         req.session.save( () => {
-          res.redirect("http://localhost:8080/listings");
+          res.redirect("/listings");
         });
         
       } else {

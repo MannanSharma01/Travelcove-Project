@@ -75,7 +75,7 @@ module.exports.create = async (req, res, next) => {
     x.then( () => {
       req.flash("successMsg", "New Listing Created !");
       req.session.save( (err)=> {  
-        res.redirect("http://localhost:3000/listings");
+        res.redirect("/listings");
       });
       
     })
@@ -135,7 +135,7 @@ module.exports.update = async (req, res, next) => {
         });
         req.flash("successMsg", "Listing Updated Successfully!");
         req.session.save( (err)=> {
-          res.redirect(`http://localhost:8080/listings/${req.params.id}`);
+          res.redirect(`/listings/${req.params.id}`);
         });
         
       } catch {
@@ -158,7 +158,7 @@ module.exports.delete = async (req, res, next) => {
    console.log("a file deleted from the cloud.");
   });
   req.session.save( (err)=> {
-    res.redirect("http://localhost:3000/listings");
+    res.redirect("/listings");
   });
   
   }         // NO NEED on 'ANY' error-handling in this function.
