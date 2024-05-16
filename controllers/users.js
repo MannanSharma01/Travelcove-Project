@@ -22,7 +22,7 @@ module.exports.signup = async (req, res) => {
 // username--mandatory, password--mandatory, username should be unique for each document, ... ) -- (validation/casting error). to handle it, using try-catch instead of wrapAsyncFn, because, in the case 'this line' gives an error, we want to do different things, than done when using 'wrapAsycnFn'.
 
     req.login(result, (err) => {
-      req.flash("successMsg", "Welcome to Wanderlust");
+      req.flash("successMsg", "Welcome to Travelcove");
       res.redirect("http://localhost:8080/listings");
     });   
   }
@@ -45,7 +45,7 @@ module.exports.loginForm = (req, res) => {
 
 
 module.exports.loginDone = (req, res) => {
-  req.flash("successMsg", "You successfully logged in. Welcome to Wanderlust 👋");
+  req.flash("successMsg", "You successfully logged in. Welcome to Travelcove 👋");
 
   if( res.locals.pathAndQS === undefined) {           // client logged in as a user, WITHOUT we forbidding it(the client) to perform an action, as it was NOT logged in as a user. 
     res.redirect("http://localhost:8080/listings");

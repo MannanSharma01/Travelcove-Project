@@ -17,7 +17,7 @@ const storage = new CloudinaryStorage(
   {
     cloudinary: cloudinary,
     params: {
-      folder: "wanderlust-first-listingImageFiles"
+      folder: "travelcove-listingImageFiles"
     }
   }
 ) ;

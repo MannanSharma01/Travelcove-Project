@@ -2,7 +2,7 @@
   "engines": {
     "node": "20.11.1"
   },
-  "name": "major-project-wanderlust",
+  "name": "major-project-travelcove",
   "version": "1.0.0",
   "description": "An AirBnb like website",
   "main": "index.js",
