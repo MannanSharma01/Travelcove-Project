@@ -1,0 +1,34 @@
+
+<nav class="navbar navbar-expand-lg  border-bottom sticky-top py-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><i class="fa-regular fa-compass"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="justify-content: space-between;">
+
+      <div class="navbar-nav">
+        <a class="nav-link" href="http://localhost:8080/listings">Explore</a>
+      </div>
+
+      <form class="d-flex" role="search" style="width: auto;"   action="http://localhost:8080/listings/countrySearch" method="get">  <!--pehle style: 450px; kiya hua tha-->
+        <input class="form-control me-2  nav-search-input" type="search" placeholder="Search Countries" name="country">
+        <button class="btn nav-search-btn" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span id="nav-search-btn-text">Search</span>
+        </button>
+      </form>
+
+      <div class="navbar-nav">
+        <a class="nav-link" href="http://localhost:3000/listings/new">Airbnb Your Home</a>
+        <% if(request.isAuthenticated()) { %>
+        <a class="nav-link" href="http://localhost:3000/logout"><b>LogOut</b></a>
+        <% } else { %>
+        <a class="nav-link" href="http://localhost:8080/signup"><b>SignUp</b></a>
+        <a class="nav-link" href="http://localhost:8080/login"><b>LogIn</b></a>
+        <% } %>
+      </div>
+
+    </div>
+  </div>
+</nav>

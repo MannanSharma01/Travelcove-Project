@@ -1,0 +1,359 @@
+* {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+
+/* navbar */
+
+.navbar {
+  background-color: white;
+}
+
+.fa-compass {
+  color: #ff385c;
+  font-size: 2rem;
+}
+
+.nav-link {
+  color: #222222;
+}
+
+/*-------search-------*/
+.nav-search-btn {
+  background-color: #ff385c;
+  color: white;
+  width: 115px;
+  border-radius: 30px;
+}
+
+.nav-search-btn:hover {
+  background-color: #ff385c;
+  color: white;
+  opacity: 0.8;
+}
+
+.nav-search-btn i {
+  display: inline;
+  margin-right: 6px;
+}
+
+.nav-search-input {
+  border-radius: 30px;
+  width: 280px;
+}
+
+@media(max-width:500px) {
+  .nav-search-input{
+    width:50vw;
+  }
+}
+@media(max-width: 320px) {
+  #nav-search-btn-text{
+    display: none;
+  }
+  .nav-search-btn {
+    width: auto;
+  }
+}
+
+/* footer */
+
+footer {  
+  margin:0;
+  padding: 0;                
+  /* border: 3px solid black; */
+  height: 7.5rem;
+  padding: 0.6rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  background-color: #f7f7f7;
+}
+
+.f-all-social-icons, .f-brand-info, .f-all-links{
+  margin: 0;
+  padding: 0;
+  /* border: 1px solid black; */
+  text-align: center;
+}
+
+
+.f-all-social-icons a {
+  display: inline-block;
+  padding:0;
+  margin:0;
+  margin-right: 15px;
+
+  color: black;
+  cursor:default;
+}
+.fa-brands {
+  font-size: 1.15rem;
+}
+
+
+.f-all-links a {
+  margin-right: 1rem;
+
+  color: #212529;  
+  text-decoration: none;
+}
+
+.f-all-links a:hover {
+  text-decoration: underline;
+}
+
+
+.f-all-social-icons i {
+  transition: 0.1s ease-in-out;
+  cursor: pointer;
+}
+.f-all-social-icons i:hover {
+  transform: scale(1.17);
+}
+
+/*all listings -- cards*/
+
+#al-card-img {
+  border-radius: 1rem;
+  height: 240px;
+}
+
+#al-card-body {
+  padding: 0;
+}
+
+#al-card-img-overlay:hover {
+  background-color: white;
+  opacity: 0.2;
+} 
+
+#al-card-anc {
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  text-decoration: none;
+  color:#222222;
+}
+
+/*add a new listing button*/
+
+.add-btn {
+  background-color: #ff385c;
+  border: none;
+}
+
+/*edit a listing button*/
+
+.edit-btn {
+  background-color: #ff385c;
+  border: none;
+}
+
+#edit-heart {
+  color:red;
+}
+
+#edit-image {
+  width: 70%;
+  height: 50vh;
+  border-radius: 1rem;
+}
+
+/* Show a particular listing page*/
+
+#sh-card-img {
+  height: 50vh;
+  border-radius: 1rem;
+}
+
+#sh-edit-btn {
+  background-color: #ff385c;
+  border: none;
+
+  padding: 0;    /*.col gives them some padding-left and right. I am making it 0*/
+
+  text-align: center;
+  text-decoration: none;
+  
+  color: white;
+
+
+  height: 40px;
+  line-height: 38px;
+}
+
+#sh-x {
+  margin:0;
+  padding:0;
+  width: 100%;                 
+  height: 100%;  
+  border: none;
+}
+
+#sh-delete {
+  padding:0;
+  height: 40px;
+  border: none;
+}
+
+#sh-owner {
+  padding:0;
+  margin:0;
+  margin-top:7px;
+}
+
+/*error page*/
+
+#er-alert {
+  text-align: center;
+}
+
+#er-cont {
+  margin-bottom: calc(100vh - 384px ) ;   /*(45.6px + 48px + 0.8px) - (75.2px + 48px+ 1.6px + 48px) - 120px - 3.2px ) = 384px*/
+}
+
+@media(max-height:450px) {
+  #er-cont {
+    margin-bottom: 60px;
+  }
+}
+
+/* map */
+
+#map {
+  /* border: 3px solid black; */
+  height: 400px;
+}
+
+
+/*---------Index Page----------*/
+
+#index-noListing {
+  height: 0;
+  width:0;
+  padding:0;
+  margin:0;
+  height: calc(100vh - 378.4px);
+}
+
+/* filters */
+
+#all-filters{
+  padding: 0;
+  margin: 0;
+  /* border: 2px solid black; */
+
+  display: flex;
+  padding: 1rem;
+  overflow-x: auto;
+
+  justify-content: start;
+
+  align-items: center;
+}
+
+.a-filter-anchor {
+  display: inline-block;
+  margin:0;
+  padding:0;
+  color:black;
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+.a-filter-anchor:hover {
+  opacity:1;
+  cursor: pointer;
+}
+
+.a-filter {
+  text-align: center;
+  margin-right: 2.2rem;
+}
+
+.first-filter{
+  margin-left:2.2rem;
+}
+
+.a-filter .text {
+  margin: 0;
+  padding: 0;
+
+  text-align: center;
+  margin-top: 6px;
+}
+
+.a-filter i {
+  font-size: 1.2rem;
+}
+
+/*scroll-bar*/
+#all-filters::-webkit-scrollbar {
+  display: none;    /* *** */
+}
+
+/* utility classes */
+.display-none {
+  display: none;
+}
+
+.bdr {
+  border: 2px solid black;
+}
+
+
+
+/* Tax-Switch */
+
+.tax-switch {
+  
+  padding: 10px !important;
+  border-radius: 1rem;
+  text-align: left !important;  /*defualt*/ /*removing the bootstrap styling*/
+
+  white-space: nowrap;  /*dont know why, under 1200px, both the inline-block elements(label and input), come on different lines. Anyways, to avoid this, writing this styling*/
+}
+
+.tax-switch label {
+  display: inline-block;
+  white-space: nowrap;
+  margin-right:14px;
+  text-align: center;
+}
+
+.tax-switch input {
+  display: inline-block;
+  margin:0px !important;
+  margin-top: 16.8px !important;
+
+  float: none !important;       /*defualt*/ /*removing the bootstrap styling*/
+}
+
+
+/* no listing matches the applied filter  page */
+
+.no-lis-mat-sad-face {
+  font-size: 100px;
+}
+
+.no-lis-mat-container {
+  text-align:center;
+  margin-bottom: calc(100vh - 423.4px);
+}
+
+.no-lis-mat-p {
+  padding: 0;
+  margin: 0;
+  font-size: 1.5rem;
+  margin-top: 25px;
+}
+
+@media(max-height:476px) {
+  .no-lis-mat-container{
+    margin-bottom: 52.6px;
+  }
+}
+

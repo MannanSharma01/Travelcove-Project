@@ -1,0 +1,144 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      
+      <div class="card col-sm-6 col-9 border-0 mb-5">        <!-- column-1 -->
+        <h3 class="mb-5">
+          Listing Details: 
+        </h3>
+
+        <img src="<%= theParticularListing.image.url %>" class="card-img-top" alt="NO PIC AVAILABLE" id="sh-card-img">
+
+        <p id="sh-owner">Owned By <i><%= theParticularListing.owner.username %></i></p>
+
+        <div class="card-body">
+  
+          <h4 class="card-title"><%= theParticularListing.title %></h4>
+          <p class="card-text">
+            <%= theParticularListing.description %> <br><br>
+            Price:  ₹ <%= (theParticularListing.price).toLocaleString("en-IN") %> / night <br><br>
+            <%= theParticularListing.location %> <br>
+            <%= theParticularListing.country %>
+          </p>
+          
+        </div>
+
+        <% if(request.isAuthenticated() && request.user._id.toString() === theParticularListing.owner._id.toString()) { %>
+
+          <div class="row justify-content-around">
+            <a class="col-sm-4 my-2   btn btn-dark" id="sh-edit-btn" href="http://localhost:8080/listings/<%= theParticularListing._id %>/edit">Edit</a>
+            <form class="col-sm-4 my-2   btn btn-dark" id="sh-delete"   action="http://localhost:8080/listings/<%= theParticularListing._id %>?_method=DELETE" method="post"><button id="sh-x" class="btn btn-dark">Delete</button></form>
+          </div>
+
+        <% } %>
+        
+      </div>
+
+      <hr class="mb-5">
+                            <!-- column-2 -->
+      <form class="col-sm-8 col-10 needs-validation" action="http://localhost:3000/listings/<%= theParticularListing._id %>/reviews" method="post" novalidate>
+      <% if(request.isAuthenticated() && request.user._id.toString() !== theParticularListing.owner._id.toString()) { %>
+        <h4 class="mb-4">   
+          Leave a Review
+        </h4>
+
+        <div class="mb-3">
+          <label for="rati" class="form-label">Rating</label>
+          <fieldset class="starability-slot">
+            <legend></legend>
+            <input type="radio" id="no-rate" class="input-no-rate" name="abc[rating]" value="1" checked aria-label="No rating." />
+            <input type="radio" id="first-rate1" name="abc[rating]" value="1" />
+            <label for="first-rate1" title="Terrible">1 star</label>
+            <input type="radio" id="first-rate2" name="abc[rating]" value="2" />
+            <label for="first-rate2" title="Not good">2 stars</label>
+            <input type="radio" id="first-rate3" name="abc[rating]" value="3" />
+            <label for="first-rate3" title="Average">3 stars</label>
+            <input type="radio" id="first-rate4" name="abc[rating]" value="4" />
+            <label for="first-rate4" title="Very good">4 stars</label>
+            <input type="radio" id="first-rate5" name="abc[rating]" value="5" />
+            <label for="first-rate5" title="Amazing">5 stars</label>
+          </fieldset>
+        </div>
+
+        <div class="mb-5">
+          <label for="com" class="form-label">Comment</label>
+          <textarea name="abc[comment]" id="com" class="form-control" required></textarea>
+          <div class="invalid-feedback">
+            Please Write a Comment
+          </div>
+        </div>
+
+        <button class="btn btn-outline-dark" type="submit">
+          Submit
+        </button>
+
+        <% if( theParticularListing.reviews.length) { %>         
+        <hr class="my-5">             <!--initially, can ignore this if statement and this hr tag. This is just to ensure the length of the hr. -->
+        <% } %>
+      <% } %>
+
+        <% if( theParticularListing.reviews.length) { %>
+        <h4 class="mb-4"> 
+          All Reviews
+        </h4>
+
+        <div class="row justify-content-around">
+          <% for(let i of theParticularListing.reviews) { %>
+              <div class="col-lg-5  col-10  card  mb-5">
+
+                <div class="card-body">
+                  <h5 class="card-title">@<%= i.author.username %></h5>
+                  <p class="starability-result card-text" data-rating="<%= i.rating %>">
+                    Rated: 3 stars
+                  </p>
+                  <p class="card-text">
+                    <%= i.comment %>
+                  </p>
+                  
+                  <% if(request.isAuthenticated() && (request.user._id.toString() === i.author._id.toString())) {%>
+                  <a href="http://localhost:8080/listings/<%= theParticularListing._id %>/reviews/<%= i._id %>" class="btn btn-dark btn-sm mt-2">Delete</a>
+                  <% } %>
+                  <p style="display: none;"><%= theParticularListing._id %></p>
+                  <p style="display: none;"><%= i._id %></p>
+                </div>
+
+              </div>
+          <% } %>
+        </div>
+        <% } %>
+      </form>
+
+      <% if( theParticularListing.reviews.length===0 && (request.isAuthenticated() && request.user._id.toString() !== theParticularListing.owner._id.toString()) ) { %>
+        <hr class="my-5">     <!--initially, can ignore this if statement and this hr tag. This is just to ensure the length of the hr. -->
+      <% } %>
+  
+
+      <% if(theParticularListing.reviews.length) { %>
+        <hr class="my-0 mb-5">
+      <% } %>
+
+      <div class="col-lg-8 col-11">      <!--column-3-->
+        <h4 class="mb-4">
+          Where You'll Be
+        </h4>
+
+        <div id="map">
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const mapApiToken = "<%= process.env.MAP_TOKEN %>" ;
+
+    let locationCoordinates = "<%= theParticularListing.geography.coordinates %>";
+    locationCoordinates = locationCoordinates.split(",");        // storing the coordinates in an array
+    for(let i = 0; i<=1; i++) {
+      locationCoordinates[i] = Number(locationCoordinates[i]);
+    }
+
+    let title = "<%= theParticularListing.title %>";
+  </script>

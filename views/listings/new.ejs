@@ -1,0 +1,100 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+  <br><br>
+  <div class="container">
+
+    <div class="row justify-content-center">
+      <form action="http://localhost:8080/listings" method="post" class="col-9 needs-validation" novalidate  enctype="multipart/form-data">      <!-- first column-->
+        
+        <h3 class="mb-4">
+          Make a New Listing
+        </h3>
+
+        <div class="mb-3">
+          <label for="tit" class="form-label">
+            Enter a Title.
+          </label>
+          <input type="text" name="abc[title]" placeholder="Enter a Catchy Title" id="tit" class="form-control" required>
+          
+          <div class="valid-feedback">Title Looks Cool</div>
+          <div class="invalid-feedback">Please enter a Title</div>
+        </div>
+    
+        <div class="mb-3">
+          <label for="des" class="form-label">
+            Enter a Description.
+          </label>
+          <textarea name="abc[description]" placeholder="Enter Description here" id="des" class="form-control" required></textarea>
+          <div class="valid-feedback">Sexy Description</div>
+          <div class="invalid-feedback">Please enter a Description</div>
+        </div>
+    
+        <div class="mb-3">
+          <label for="im" class="form-label">
+            Upload an Image
+          </label>                                                        <!--client-side-validation for file-format-->
+          <input type="file" name="image" id="im" class="form-control" required   accept=".jpg, .jpeg, .png">
+
+          <div class="invalid-feedback">Please Upload an Image</div>
+        </div>
+    
+        <div class="row">               
+
+          <div class="col-md-4 mb-3">
+            <label for="pr" class="form-label">
+              Enter Price 
+            </label>
+            <input type="text" name="abc[price]" placeholder="1200" id="pr" class="form-control" required>
+
+            <div class="invalid-feedback">Please enter a Price</div>
+          </div>
+      
+          <div class="col-md-8 mb-3">
+            <label for="co" class="form-label">
+              Enter Country 
+            </label>
+            <input type="text" name="abc[country]" placeholder="India" id="co" class="form-control" required>
+
+            <div class="invalid-feedback">Please enter the Country Name</div>
+          </div>
+
+        </div>
+        
+        <div class="mb-4">
+          <label for="loc" class="form-label">
+            Enter Location 
+          </label>
+          <input type="text" name="abc[location]" placeholder="Jaipur, Rajasthan" id="loc" class="form-control" required>
+          <div class="invalid-feedback">Please enter the Location</div>
+        </div>
+
+        <div class="mb-4">
+          <label for="cat" class="form-label">
+            Add Categories&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;( hold down the Ctrl or Cmd key to select multiple options.)
+          </label>
+          <select name="abc[categories]" id="cat" class="form-select" multiple>
+            <option value="room">Rooms</option> <hr class="my-1">
+            <option value="camping">Camping</option> <hr class="my-1">
+            <option value="castle">Castle</option> <hr class="my-1">
+            <option value="farm">Farm</option> <hr class="my-1">
+            <option value="beach">Beach</option> <hr class="my-1">
+            <option value="pool">Pools</option> <hr class="my-1">
+            <option value="ski">Ski-in/out</option> <hr class="my-1">
+            <option value="arctic">Arctic</option>
+            <!-- Add more options as needed -->
+          </select>
+        </div>
+
+    
+        <button class="btn btn-dark add-btn">
+          Proceed
+        </button>
+    
+      </form>
+    </div>
+
+  </div>
+
+  <br><br><br>
+
+  

@@ -1,0 +1,61 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+  <div class="container mt-3 mb-5">
+
+    <%- include("../includes/filters.ejs") %>
+
+    <% if(allListings.length) { %>
+    <div class="row">           <!-- row-1 -->
+
+      <% for(let i of allListings) { %> 
+
+        <div class="card col-sm-6 col-lg-4 col-xl-3 mb-4   px-3 border-0 " id="al-card">
+          <a href="http://localhost:8080/listings/<%= i._id %>"  id="al-card-anc">
+            <img src="<%= i.image.url %>" class="card-img-top"  id="al-card-img">
+            <div class="card-img-overlay" id="al-card-img-overlay"></div>
+            <div class="card-body"   id="al-card-body">
+              <p class="card-text">
+                <b><%= i.title %></b>      <br>
+                <span class="price-before-tax">₹ <%= (i.price).toLocaleString("en-IN") %> / night</span>
+                <span class="price-after-tax display-none">₹ <%= (i.price + 0.18 * i.price).toLocaleString("en-IN") %> / night<br><i style="font-size: 15px;">(18% GST included)</i></span>
+              </p>
+            </div>
+            <p style="display: none" class="listing-ID"><%= i._id %></p>
+          </a>
+        </div>
+  
+      <% } %>
+
+    </div>
+    <% } %>
+  </div>
+
+  <% if(!allListings.length) { %>
+    <div id="index-noListing"></div>
+  <% }%>
+
+<script src="/js/tax.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

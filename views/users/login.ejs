@@ -1,0 +1,33 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<div class="container my-5">
+  <div class="row justify-content-center border-primary">
+
+    <form action="http://localhost:3000/login" method="post" class="col-9 needs-validation" novalidate>
+
+      <h3 class="mb-4">
+        Login in Wanderlust
+      </h3>
+
+      <div class="mb-3">
+        <label for="un" class="form-label">Enter Your Username</label>
+        <input type="text" name="username" placeholder="Username" id="un" class="form-control" required>
+        <div class="invalid-feedback">Please enter Your Username</div>
+      </div>
+
+      <div class="mb-4">
+        <label for="pw" class="form-label">Enter Your Password</label>
+        <input type="password" name="password" placeholder="Password" id="pwd" class="form-control" required>
+        <div class="invalid-feedback">Please Enter Your Password</div>
+      </div>
+
+      <button class="btn btn-success">
+        LogIn
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+<br> <br> <br> <br><br>

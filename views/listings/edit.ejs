@@ -1,0 +1,91 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <form class="col-8 needs-validation" action="http://localhost:8080/listings/<%= theParticuarListing._id %>?_method=PUT" method="post" novalidate  enctype="multipart/form-data">
+      <h3 class="mb-3">
+        Edit this Listing
+      </h3>
+  
+      <div class="mb-3">
+        <label for="ti" class="form-label">Title</label>
+        <input type="text" name="xyz[title]" value="<%= theParticuarListing.title %>" id="ti" class="form-control" required>
+        <div class="invalid-feedback">Please enter a Title</div>
+        <div class="valid-feedback">Great Title!!</div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="des" class="form-label">Description</label>
+        <textarea name="xyz[description]" class="form-control" id="des" required><%= theParticuarListing.description %></textarea>
+        <div class="valid-feedback">Lovely Description <span id="edit-heart">♥</span></div>
+        <div class="invalid-feedback">Please enter a Short Description</div>
+      </div>
+      
+      <div class="mb-3">
+        <p>Orignal Image</p>
+        <img src="<%= url %>" id="edit-image">
+      </div>
+
+      <div class="mb-3">
+        <label for="im" class="form-label">Upload Image</label>
+        <input type="file" name="image" id="im" class="form-control" required accept=".jpg, .jpeg, .png">
+        <div class="invalid-feedback">Please upload an Image</div>
+      </div>      
+            
+      <div class="row">
+
+        <div class="col-md-4 mb-3">
+          <label for="pr" class="form-label">Price</label>
+          <input type="number" name="xyz[price]" value="<%= theParticuarListing.price %>" id="pr" class="form-control" required>
+          <div class="invalid-feedback">Please enter the Location</div>
+        </div>
+        
+        <div class="mb-3 col-md-8">
+          <label for="cou" class="form-label">Country</label>
+          <input type="text" name="xyz[country]" value="<%= theParticuarListing.country %>" class="form-control" id="cou" required>
+          <div class="invalid-feedback">Please enter the Country Name</div>
+        </div>
+
+      </div>
+      
+      <div class="mb-4 ">
+        <label for="loc" class="form-label">Location</label>
+        <input type="text" name="xyz[location]" value="<%= theParticuarListing.location %>" id="loc" class="form-control" required>
+        <div class="invalid-feedback">Please enter the Location</div>
+      </div>
+
+      <div class="mb-4">
+        <label for="cat" class="form-label">
+          Add Categories&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;( hold down the Ctrl or Cmd key to select multiple options.)
+        </label>
+        <select name="xyz[categories]" id="cat" class="form-select" multiple>
+          <option value="room">Rooms</option> <hr class="my-1">
+          <option value="camping">Camping</option> <hr class="my-1">
+          <option value="castle">Castle</option> <hr class="my-1">
+          <option value="farm">Farm</option> <hr class="my-1">
+          <option value="beach">Beach</option> <hr class="my-1">
+          <option value="pool">Pools</option> <hr class="my-1">
+          <option value="ski">Ski-in/out</option> <hr class="my-1">
+          <option value="arctic">Arctic</option>
+          <!--add more options as needed-->
+        </select>
+      </div>
+  
+      <button class="btn btn-dark edit-btn">
+        Edit
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>      // to preselect the categories, the listing had orignally
+  let ctgrs = `<%= theParticuarListing.categories %>`;
+  ctgrs = ctgrs.split(",");
+  let allOptionElements = document.querySelectorAll("option");
+  let i;
+  for(i of allOptionElements) {
+    if( ctgrs.includes(i.getAttribute("value")) ) {
+      i.setAttribute("selected", "true");
+    }
+  }
+</script>

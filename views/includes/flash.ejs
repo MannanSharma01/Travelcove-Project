@@ -1,0 +1,15 @@
+<% if(successMsg.length) { %>
+    <div class="alert alert-success alert-dismissible fade show mx-5 mt-4" role="alert" style="text-align: center;">
+      <%= successMsg %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>
+
+<% if(failureMsg.length) { %>
+  <div class="alert alert-danger alert-dismissible fade show mx-5 mt-4" role="alert" style="text-align: center;">
+    <%= failureMsg %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } %>
+
+
